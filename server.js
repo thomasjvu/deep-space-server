@@ -9,6 +9,9 @@ const PORT = process.env.PORT || 3005;
 
 const app = express();
 
+// Connect to MongoDB
+connectDB();
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -25,8 +28,6 @@ app.listen(PORT, () => {
     console.log(`Please visit the website at http://localhost:${PORT}`);
 });
 
-// Connect to Database
-connectDB();
 
 // Serve Frontend
 // if (process.env.NODE_ENV === "production") {
