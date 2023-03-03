@@ -4,10 +4,8 @@ const colors = require("colors");
 const dotenv = require("dotenv").config();
 const connectDB = require("./config/db");
 const logger = require("morgan");
-const PORT = process.env.PORT || 3005;
 const { errorHandler } = require("./middleware/errorMiddleware");
-
-connectDB();
+const PORT = process.env.PORT || 3005;
 
 const app = express();
 
@@ -17,8 +15,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(logger("dev"));
 app.use(errorHandler);
 
+// Use Routes
 app.use("/users", require("./routes/userRoutes"));
 app.use("/notes", require("./routes/noteRoutes"));
+
+// Listen for open ports
+app.listen(PORT, () => {
+    console.log(`Server started on PORT:${PORT}`);
+    console.log(`Please visit the website at http://localhost:${PORT}`);
+});
+
+// Connect to Database
+connectDB();
 
 // Serve Frontend
 // if (process.env.NODE_ENV === "production") {
@@ -33,7 +41,3 @@ app.use("/notes", require("./routes/noteRoutes"));
 //     app.get('/', (req, res) => res.send('Please set to production'))
 // }
 
-app.listen(PORT, () => {
-    console.log(`Server started on PORT:${PORT}`);
-    console.log(`Please visit the website at http://localhost:${PORT}`);
-});
