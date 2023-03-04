@@ -47,6 +47,7 @@ const postSingleNote = asyncHandler(async (req, res) => {
 
     const note = await Note.create({
         text: req.body.text,
+        privacy: req.body.privacy,
         user: req.user.id
     })
 

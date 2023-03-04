@@ -6,9 +6,9 @@ const noteSchema = mongoose.Schema(
             type: String,
             required: [true, "Please add a text value"],
         },
-        public: {
-            type: Boolean,
-            default: true
+        privacy: {
+            type: String,
+            default: "public"
         },
         user: {
             type: mongoose.Schema.Types.ObjectId,
